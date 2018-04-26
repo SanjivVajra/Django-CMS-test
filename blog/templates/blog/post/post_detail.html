@@ -1,0 +1,56 @@
+{% extends 'blog/base.html'%}
+{% block description %}
+{{post.seo_description}}
+{% endblock %}
+{% block title %}{{post.seo_title}}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div class="page-header">
+            <h3>{{ post.title }}</h3>
+        </div>
+        <small>Written by: {{ post.author }} on {{ post.published }} in <a href="{{ post.category.get_absolute_url }}">{{post.category}}</a>
+        </small>
+        <hr>
+        {{ post.content|linebreaks }}
+        <div class="page-header">
+            <h4>
+                Leave your comment<small style="float:right">
+                    comments: {{post.comments.count}}
+                </small>
+
+            </h4>
+
+        </div>
+        <p class="text-center">
+            <a class="btn btn-info" href="{% url 'blog:add_comment' slug=post.slug %}" role="button">
+                Leave your comment
+            </a>
+        </p>
+        {% for comment in post.comments.all %}
+        <div class="card border-info mb-3">
+            <div class="card-header">
+                {{ comment.user }} commented on {{ comment.created }}
+            </div>
+            <div class="card-body text-primary">
+                <p class="card-text">
+                    {{ comment.body }}
+                </p>
+            </div>
+        </div>
+        <hr>
+        {% empty %}
+        <p>no comments</p>
+        <hr>
+        {% endfor %}
+    </div>
+    <div class="col-md-3">
+        <div class="page-header">
+            <h4>Sidebar</h4>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+

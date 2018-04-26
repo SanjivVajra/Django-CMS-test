@@ -1,0 +1,73 @@
+{% extends 'blog/base.html'%}
+{% block title %}
+List of blogs
+{% endblock %}
+{% block content %}
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th scope="col">Title</th>
+        <th scope="col">Slug</th>
+        <th scope="col">Author</th>
+        <th scope="col">Published</th>
+        <th scope="col">Status</th>
+        <th scope="col">Edit</th>
+        <th scope="col">Delete</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+    {% if post.status == 'draft' %}
+    <tr class="p-3 mb-2 bg-light text-dark">
+        <td>{{post.title}}</td>
+        <td>{{post.slug}}</td>
+        <td>{{post.author}}</td>
+        <td>{{post.published}}</td>
+        <td>{{post.status}}</td>
+        <td><a href="{% url 'blog:edit_post' slug=post.slug %}">
+            <button class="btn btn-info">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="true">
+                    Edit
+                </span>
+            </button>
+        </a></td>
+        <td><a href="{% url 'blog:delete_post' slug=post.slug %}">
+            <button class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                    Delete
+                </span>
+            </button>
+        </a></td>
+    </tr>
+
+    {% else %}
+    <tr>
+        <td>{{post.title}}</td>
+        <td>{{post.slug}}</td>
+        <td>{{post.author}}</td>
+        <td>{{post.published}}</td>
+        <td>{{post.status}}</td>
+        <td><a href="{% url 'blog:edit_post' slug=post.slug %}">
+            <button class="btn btn-info">
+                <span class="glyphicon glyphicon-pencil" aria-hidden="True">
+                    Edit
+                </span>
+            </button>
+        </a></td>
+        <td><a href="{% url 'blog:delete_post' slug=post.slug %}">
+            <button class="btn btn-danger">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true">
+                    Delete
+                </span>
+            </button>
+        </a></td>
+    </tr>
+
+    {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+    {% include 'blog/paginator.html' with page=posts %}
+</div>
+{% endblock %}

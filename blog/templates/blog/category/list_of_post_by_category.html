@@ -1,0 +1,31 @@
+{% extends 'blog/base.html'%}
+{% block description %}
+    Description
+{% endblock %}
+{% block title %}
+    {{category.name}}
+{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-md-9">
+        <div class="page-header">
+            <h4>Latest post in {{category.name}}</h4>
+        </div>
+    {% for posts in post %}
+        <h3>
+            <a href="{{posts.get_absolute_url}}">
+                {{ posts.title }}
+            </a>
+        </h3>
+        <small>written by: {{ posts.author }} on {{ posts.published }}</small>
+        <hr>
+        {{ posts.content|truncatewords:40|linebreaks }}
+    {% endfor %}
+    </div>
+    <div class="col-md-3">
+        <div class="page-header">
+            <h4>Sidebar</h4>
+        </div>
+    </div>
+</div>
+{% endblock %}
