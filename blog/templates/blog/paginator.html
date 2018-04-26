@@ -1,49 +1,55 @@
 <nav aria-label="Page navigation">
     {% if page.has_other_pages %}
-    <ul class="breadcrumb">
+    <ul class="pagination">
         {% if page.has_previous %}
-        <li class="breadcrumb-item">
-            <a aria-label="Previous" href="?page={{page.previous_page_number}}">
+        <li class="page-item">
+            <a class="page-link" aria-label="Previous" href="?page={{page.previous_page_number}}">
                 &laquo;
             </a>
         </li>
         {% else %}
-        <li class="breadcrumb-item disable">
+        <li class="page-item disable">
+            <a class="page-link" href="#">
             <span>
                 &laquo;
             </span>
+        </a>
+            {% endif %}
         </li>
-        {% endif %}
         {% for pages in page.paginator.page_range %}
         {% if page.number == pages %}
-        <li class="breadcrumb-item active">
+        <li class="page-item active">
+            <a class="page-link" href="#">
             <span>
                 {{ pages }}
                 <span class="sr_only">
-                    (current)
+
                 </span>
             </span>
+            </a>
         </li>
         {% else %}
-        <li class="breadcrumb-item">
-            <a href="?page={{pages}}">
+        <li class="page-item">
+            <a class="page-link" href="?page={{pages}}">
                 {{pages}}
             </a>
         </li>
         {% endif %}
         {% endfor %}
         {% if page.has_next %}
-        <li class="breadcrumb-item">
-            <a href="?page={{ page.next_page_number }}">
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page.next_page_number }}">
                 &raquo;
             </a>
         </li>
         {% else %}
-            <li class="breadcrumb-item disable">
+        <li class="page-item disable">
+            <a class="page-link" href="#">
                 <span>
                     &raquo;
                 </span>
-            </li>
+        </a>
+        </li>
         {% endif %}
     </ul>
     {% endif %}

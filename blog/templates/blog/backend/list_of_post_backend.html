@@ -3,6 +3,12 @@
 List of blogs
 {% endblock %}
 {% block content %}
+<div class="header">
+
+</div>
+
+
+<div class="container">
 <div class="table-responsive">
 <table class="table table-hover">
     <thead>
@@ -69,5 +75,6 @@ List of blogs
     </tbody>
 </table>
     {% include 'blog/paginator.html' with page=posts %}
+</div>
 </div>
 {% endblock %}
