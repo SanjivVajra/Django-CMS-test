@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f681c5f0-a00c-4817-a2b2-ed7e12e39452" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/blog/templates/blog/backend/list_of_post_backend.html" afterPath="$PROJECT_DIR$/blog/templates/blog/backend/list_of_post_backend.html" />
       <change beforePath="$PROJECT_DIR$/blog/templates/blog/paginator.html" afterPath="$PROJECT_DIR$/blog/templates/blog/paginator.html" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -29,12 +27,12 @@
       <file leaf-file-name="paginator.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/templates/blog/paginator.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+            <state relative-caret-position="326">
+              <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
               <folding>
                 <element signature="e#278#285#0" expanded="true" />
                 <element signature="e#453#460#0" expanded="true" />
-                <element signature="e#1407#1414#0" expanded="true" />
+                <element signature="e#1443#1450#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -172,6 +170,14 @@
       <option name="presentableId" value="Default" />
       <updated>1524461012309</updated>
     </task>
+    <task id="LOCAL-00001" summary="updated">
+      <created>1524742584985</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1524742584985</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -210,6 +216,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="updated" />
+    <option name="LAST_COMMIT_MESSAGE" value="updated" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -607,12 +617,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/templates/blog/paginator.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+        <state relative-caret-position="326">
+          <caret line="27" column="19" lean-forward="true" selection-start-line="27" selection-start-column="19" selection-end-line="27" selection-end-column="19" />
           <folding>
             <element signature="e#278#285#0" expanded="true" />
             <element signature="e#453#460#0" expanded="true" />
-            <element signature="e#1407#1414#0" expanded="true" />
+            <element signature="e#1443#1450#0" expanded="true" />
           </folding>
         </state>
       </provider>
