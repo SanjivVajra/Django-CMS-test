@@ -1,12 +1,9 @@
-from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.http import Http404, HttpResponseRedirect
+from django.http import Http404
 from django.contrib import messages
-from django.views.generic import TemplateView
-
 from .models import Post, Category
-from .forms import CommentForm, PostForm, LoginForm
+from .forms import CommentForm, PostForm
 
 
 # Create your views here.
@@ -121,46 +118,7 @@ def edit_post(request, slug):
 def delete_post(request, slug):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
-    post = get_object_or_404(Post, slug=slug)
+    post =get_object_or_404(Post, slug=slug)
     post.delete()
     messages.success(request, "Successfully Deleted")
     return redirect('blog:list_of_post_backend')
-
-
-class AdminLogin(TemplateView):
-    template_name = 'blog/templates/blog/backend/login.html'
-
-    def get_context_data(self):
-        context = super(AdminLogin, self).get_context_data()
-        form = LoginForm()
-        context['form'] = form
-        return context
-
-    @staticmethod
-    def post(request):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            form = LoginForm()
-            print(user)
-            print('form valid')
-            if user is not None:
-                if user.is_active:
-                    print('user is active')
-                    login(request, user)
-                    return HttpResponseRedirect('blog/backend/list_of_post_backend.html')
-            else:
-                print('else')
-                # raise forms.ValidationError("Invalid Username or  Password")
-                return HttpResponseRedirect('blog/backend/login.html')
-
-
-class AdminLogout(object):
-    template_name = 'blog/backend/logout.html'
-
-    @staticmethod
-    def post(request):
-        logout(request)
-        return HttpResponseRedirect('blog/backend/login.html')  # simply for logout only

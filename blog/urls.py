@@ -1,6 +1,7 @@
 from django.conf.urls import url
 from . import views
 
+
 urlpatterns = [
     url(r'^$', views.list_of_post, name='list_of_post'),
     url(r'^draft/$', views.draft_list_of_post, name='draft_list_of_post'),
@@ -11,8 +12,4 @@ urlpatterns = [
     url(r'^backend/post/$', views.list_of_post_backend, name='list_of_post_backend'),
     url(r'^backend/(?P<slug>[-\w\s]+)/edit$', views.edit_post, name='edit_post'),
     url(r'^backend/(?P<slug>[-\w\s]+)/delete$', views.delete_post, name='delete_post'),
-
-    url(r'^login/$', views.AdminLogin, name='admin_login'),
-    url(r'^logout/$', views.AdminLogout, name='admin_logout'),
-    # url(r'^backend/$', AdminHomePage.as_view(), name='admin_homepage'),
 ]
