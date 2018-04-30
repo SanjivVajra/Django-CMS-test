@@ -14,6 +14,10 @@ class Category(models.Model):
         verbose_name = 'category'
         verbose_name_plural = 'categories'
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         return reverse('blog:list_of_post_by_category', args=[self.slug])
 

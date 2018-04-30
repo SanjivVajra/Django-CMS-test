@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import Http404
 from django.contrib import messages
 from .models import Post, Category
-from .forms import CommentForm, PostForm
+from .forms import CommentForm, PostForm, CategoryForm
 
 
 # Create your views here.
@@ -118,7 +118,22 @@ def edit_post(request, slug):
 def delete_post(request, slug):
     if not request.user.is_staff or not request.user.is_superuser:
         raise Http404
-    post =get_object_or_404(Post, slug=slug)
+    post = get_object_or_404(Post, slug=slug)
     post.delete()
     messages.success(request, "Successfully Deleted")
     return redirect('blog:list_of_post_backend')
+
+
+def new_category(request):
+    if request.method == "POST":
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            category = form.save(commit=False)
+            category.save()
+            # print(category.save())
+            return redirect('blog:new_post')
+    else:
+        form = CategoryForm()
+    template = 'blog/backend/new_category.html'
+    context = {'form': form}
+    return render(request, template, context)
