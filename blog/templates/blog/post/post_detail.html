@@ -1,4 +1,6 @@
 {% extends 'blog/base.html'%}
+{% load crispy_forms_tags %}
+
 {% block description %}
 {{post.seo_description}}
 {% endblock %}
@@ -18,15 +20,22 @@
                 Leave your comment<small style="float:right">
                     comments: {{post.comments.count}}
                 </small>
-
             </h4>
-
         </div>
         <p class="text-center">
-            <a class="btn btn-info" href="{% url 'blog:add_comment' slug=post.slug %}" role="button">
-                Leave your comment
-            </a>
+            <!--<a class="btn btn-info" href="{% url 'blog:add_comment' slug=post.slug %}" role="button">-->
+                <!--Leave your comment-->
+            <!--</a>-->
         </p>
+        <div>
+            <form method="POST">
+                {% csrf_token %}
+                {{ form|crispy }}
+            <button type="submit" class="btn btn-success">
+                Submit
+            </button>
+            </form>
+        </div>
         {% for comment in post.comments.all %}
         <div class="card border-info mb-3">
             <div class="card-header">

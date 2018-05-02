@@ -18,6 +18,11 @@
     <body>
         <div class="container">
             {% include "blog/messages.html" %}
+            {% comment %}
+            <!--<a href="{% url 'accounts:logout_user' %}">-->
+                <!--<span class="glyphicon glyphicon-off" aria-hidden="true">-->
+                <!--</span>&nbsp; Logout-->
+            <!--</a>-->{% endcomment %}
             {% block content %}
             {% endblock %}
         </div>
