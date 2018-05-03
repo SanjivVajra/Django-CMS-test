@@ -44,10 +44,13 @@ def post_detail(request, slug):
     post = get_object_or_404(Post, slug=slug)
     form = InBlogCommentForm(request.POST)
     user = request.user
+    if user is None:
+        user = "Anonymous"
     if request.method == 'POST':
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
+            comment.user = user
             user.save()
             comment.save()
             return redirect('blog:post_detail', slug=post.slug)
@@ -57,7 +60,8 @@ def post_detail(request, slug):
         template = 'blog/post/post_detail.html'
     else:
         template = 'blog/post/post_preview.html'
-    context = {'post': post}
+    context = {'post': post, 'form': form, 'user': user}
+    print(user)
     return render(request, template, context)
 
 

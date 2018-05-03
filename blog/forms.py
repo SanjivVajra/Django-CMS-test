@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import TextInput
+
 from .models import Comment, Post, Category
 
 
@@ -24,3 +26,5 @@ class InBlogCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+
+
