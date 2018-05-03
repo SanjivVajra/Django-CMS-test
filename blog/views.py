@@ -9,6 +9,7 @@ from .forms import CommentForm, PostForm, CategoryForm, InBlogCommentForm
 # Create your views here.
 def list_of_post(request):
     post = Post.objects.filter(status='published')
+    category = Category.objects.all()
     paginator = Paginator(post, 3)
     page = request.GET.get('page')
     try:
@@ -18,7 +19,7 @@ def list_of_post(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     template = 'blog/post/list_of_post.html'
-    context = {'posts': posts, 'page': page}
+    context = {'posts': posts, 'page': page, 'category': category}
     return render(request, template, context)
 
 

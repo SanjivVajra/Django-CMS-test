@@ -2,7 +2,7 @@
 
 
 {% block description %}
-    Description
+Description
 {% endblock %}
 {% block title %}List of Blogs{% endblock %}
 {% block content %}
@@ -11,7 +11,7 @@
         <div class="page-header">
             <h4>List of Blogs</h4>
         </div>
-    {% for post in posts %}
+        {% for post in posts %}
         <h3>
             <a href="{{post.get_absolute_url}}">
                 {{ post.title }}
@@ -25,15 +25,24 @@
         </small>
         <hr>
         {{ post.content|truncatewords:40|linebreaks }}
-    {% endfor %}
+        {% endfor %}
         {% include 'blog/paginator.html' with page=posts %}
+
+
     </div>
     <div class="col-md-3">
         <div class="page-header">
             <h4>Sidebar</h4>
+            <hr>
+            <h5>List of Categories</h5>
+            {% for category in category %}
+            <a href="{{category.get_absolute_url}}">
+                {{ category.name }}<br>
+            </a>
+            {% endfor %}
+
         </div>
     </div>
-
 </div>
 {% endblock %}
 
