@@ -1,0 +1,17 @@
+<hr>
+<h5 align="center">List of Categories</h5>
+{% for category in categories %}
+<h6 align="center">
+<a href="{{category.get_absolute_url}}">
+    {{ category.name }}<br>
+</a>
+</h6>
+{% endfor %}
+<hr>
+<h5 align="center">Latest Posts</h5>
+{% for post in post_all %}
+<h6 align="center">
+    <a href="{{post.get_absolute_url}}">
+        {{post.title}}
+</h6>
+{% endfor %}

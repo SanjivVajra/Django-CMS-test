@@ -32,15 +32,16 @@ Description
     </div>
     <div class="col-md-3">
         <div class="page-header">
-            <h4>Sidebar</h4>
-            <hr>
-            <h5>List of Categories</h5>
-            {% for category in category %}
-            <a href="{{category.get_absolute_url}}">
-                {{ category.name }}<br>
-            </a>
-            {% endfor %}
-
+            <h4 align="center">Sidebar</h4>
+            <!--{{ category}}//-->
+            <!--{{ posts }}-->
+            <!--<h5>List of Categories</h5>-->
+            <!--{% for category in category %}-->
+            <!--<a href="{{category.get_absolute_url}}">-->
+                <!--{{ category.name }}<br>-->
+            <!--</a>-->
+            <!--{% endfor %}-->
+            {% include "blog/sidebar.html"%}
         </div>
     </div>
 </div>

@@ -4,12 +4,14 @@ from django.http import Http404
 from django.contrib import messages
 from .models import Post, Category
 from .forms import CommentForm, PostForm, CategoryForm, InBlogCommentForm
+from django.views.generic import ListView
 
 
 # Create your views here.
 def list_of_post(request):
+    post_all = Post.objects.order_by('-published')[:8]
     post = Post.objects.filter(status='published')
-    category = Category.objects.all()
+    categories = Category.objects.all()
     paginator = Paginator(post, 3)
     page = request.GET.get('page')
     try:
@@ -19,18 +21,39 @@ def list_of_post(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     template = 'blog/post/list_of_post.html'
-    context = {'posts': posts, 'page': page, 'category': category}
+    context = {'posts': posts, 'page': page, 'categories': categories, 'post_all': post_all}
     return render(request, template, context)
 
 
+# class ListPost(ListView):
+#     model = Post
+#     template_name = 'blog/post/list_of_post.html'
+#     paginate_by = 10
+#
+#     def get_context_data(self,**kwargs):
+#         context = super(ListPost,self).get_context_data(**kwargs)
+#         context['posts'] = Post.objects.filter(status='published')
+#         context['category'] = Post.objects.all()
+#         return context
+#
+#     def get_template_names(self):
+#         if
+
+
 def list_of_post_by_category(request, category_slug):
+    post_all = Post.objects.order_by('-published')[:8]
     categories = Category.objects.all()
     post = Post.objects.filter(status='published')
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
         post = post.filter(category=category)
     template = 'blog/category/list_of_post_by_category.html'
-    context = {'categories': categories, 'post': post, 'category': category}
+    context = {
+        'categories': categories,
+        'post': post,
+        'category': category,
+        'post_all': post_all
+    }
     return render(request, template, context)
 
 
@@ -42,7 +65,9 @@ def draft_list_of_post(request):
 
 
 def post_detail(request, slug):
+    post_all = Post.objects.order_by('-published')[:8]
     post = get_object_or_404(Post, slug=slug)
+    categories = Category.objects.all()
     form = InBlogCommentForm(request.POST)
     user = request.user
     if user is None:
@@ -61,8 +86,7 @@ def post_detail(request, slug):
         template = 'blog/post/post_detail.html'
     else:
         template = 'blog/post/post_preview.html'
-    context = {'post': post, 'form': form, 'user': user}
-    print(user)
+    context = {'post': post, 'form': form, 'user': user, 'categories': categories, 'post_all': post_all}
     return render(request, template, context)
 
 

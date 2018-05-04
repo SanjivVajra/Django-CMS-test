@@ -1,10 +1,12 @@
 from django.conf.urls import url
 from . import views
+from .views import *
 
 app_name = 'blog'
 
 urlpatterns = [
     url(r'^$', views.list_of_post, name='list_of_post'),
+    # url(r'^$', ListPost.as_view(), name='list_of_post'),
     url(r'^draft/$', views.draft_list_of_post, name='draft_list_of_post'),
     url(r'^(?P<slug>[-\w\s]+)/$', views.post_detail, name='post_detail'),
     url(r'^(?P<slug>[-\w\s]+)/comment/$', views.add_comment, name='add_comment'),
