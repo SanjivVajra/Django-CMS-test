@@ -9,7 +9,7 @@ from django.views.generic import ListView
 
 # Create your views here.
 def list_of_post(request):
-    post_all = Post.objects.order_by('-published')[:8]
+    post_all = Post.objects.filter(status='published').order_by('-published')[:8]
     post = Post.objects.filter(status='published')
     categories = Category.objects.all()
     paginator = Paginator(post, 3)
@@ -41,7 +41,7 @@ def list_of_post(request):
 
 
 def list_of_post_by_category(request, category_slug):
-    post_all = Post.objects.order_by('-published')[:8]
+    post_all = Post.objects.filter(status='published').order_by('-published')[:8]
     categories = Category.objects.all()
     post = Post.objects.filter(status='published')
     if category_slug:
@@ -65,7 +65,7 @@ def draft_list_of_post(request):
 
 
 def post_detail(request, slug):
-    post_all = Post.objects.order_by('-published')[:8]
+    post_all = Post.objects.filter(status='published').order_by('-published')[:8]
     post = get_object_or_404(Post, slug=slug)
     categories = Category.objects.all()
     form = InBlogCommentForm(request.POST)
