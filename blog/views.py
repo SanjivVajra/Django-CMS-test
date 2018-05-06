@@ -148,6 +148,7 @@ def new_post(request):
 def list_of_post_backend(request):
     if request.user.is_authenticated():
         post = Post.objects.all()
+        user = request.user
         paginator = Paginator(post, 5)
         page = request.GET.get('page')
         try:
@@ -157,7 +158,7 @@ def list_of_post_backend(request):
         except EmptyPage:
             posts = paginator.page(paginator.num_pages)
         template = 'blog/backend/list_of_post_backend.html'
-        context = {'posts': posts, 'page': page}
+        context = {'posts': posts, 'page': page, 'user': user}
         return render(request, template, context)
     else:
         return redirect('blog:list_of_post')
