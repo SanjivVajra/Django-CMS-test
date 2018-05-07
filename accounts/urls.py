@@ -14,7 +14,8 @@ from django.contrib.auth.views import (
 from . import views
 
 urlpatterns = [
-    url(r'^login/$', LoginView.as_view(template_name='accounts/login.html'), name='login'),
+    url(r'^login/$', LoginView.as_view(template_name='accounts/login.html', redirect_authenticated_user=True),
+        name='login'),
     url(r'^register/$', views.UserFormView.as_view(), name='register'),
     url(r'^logout/$', LogoutView.as_view(next_page=reverse_lazy('login')), name='logout'),
 
@@ -25,7 +26,7 @@ urlpatterns = [
         PasswordChangeDoneView.as_view(template_name='accounts/password_change_done.html'),
         name='password_change_done'),
 
-url(r'^password_reset/$',
+    url(r'^password_reset/$',
         PasswordResetView.as_view(template_name='accounts/password_reset_form.html'),
         name='password_reset'),
     url(r'^password_reset/done/$',

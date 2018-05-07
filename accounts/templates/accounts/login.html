@@ -1,12 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% if user.is_active %}
+active
+{% endif %}
 <h3>Please Login</h3>
 <form action=""  method="post">
     {% csrf_token %}
-    {{ form.as_p }}
+    {% include 'accounts/form_template.html' %}
     <input type="submit" value="login" /><br />
-    <a href="{% url "register" %}">Register an Account</a>
+    <a href="{% url "register" %}">Register an Account</a><br>
     <a href="{% url "password_reset" %}">Can't Remember Password</a>
    </form>
 {% endblock %}

@@ -142,7 +142,7 @@ def new_post(request):
         context = {'form': form}
         return render(request, template, context)
     else:
-        return redirect('blog:list_of_post')
+        raise Http404
 
 
 def list_of_post_backend(request):
@@ -161,7 +161,7 @@ def list_of_post_backend(request):
         context = {'posts': posts, 'page': page, 'user': user}
         return render(request, template, context)
     else:
-        return redirect('blog:list_of_post')
+        raise Http404
 
 
 def edit_post(request, slug):
@@ -180,7 +180,7 @@ def edit_post(request, slug):
         context = {'form': form}
         return render(request, template, context)
     else:
-        return redirect('blog:list_of_post')
+        raise Http404
 
 
 def delete_post(request, slug):
@@ -192,7 +192,7 @@ def delete_post(request, slug):
         messages.success(request, "Successfully Deleted")
         return redirect('blog:list_of_post_backend')
     else:
-        return redirect('blog:list_of_post')
+        raise Http404
 
 
 def new_category(request):
@@ -210,4 +210,4 @@ def new_category(request):
         context = {'form': form}
         return render(request, template, context)
     else:
-        return redirect('blog:list_of_post')
+        raise Http404
